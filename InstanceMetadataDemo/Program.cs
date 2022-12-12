@@ -1,11 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Amazon.EC2;
-using Amazon.EC2.Internal;
-using Amazon.EC2.Model;
-using Amazon.Util;
-using System.Reflection;
-using Newtonsoft.Json;
-using InstanceMetadataDemo;
+﻿using InstanceMetadataDemo;
 
 Console.WriteLine("InstanceMetadataDemo");
 Console.WriteLine("This demo app will enumerate items in the EC2 Instance Metadata and output them as JSON");

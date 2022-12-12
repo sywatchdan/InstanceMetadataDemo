@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Amazon.EC2;
-using Amazon.EC2.Internal;
-using Amazon.EC2.Model;
+﻿using Newtonsoft.Json;
 using Amazon.Util;
-using Amazon.Runtime.Internal.Transform;
 
 namespace InstanceMetadataDemo {
     internal class InstanceMetadata {
