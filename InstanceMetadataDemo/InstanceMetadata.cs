@@ -31,14 +31,22 @@ namespace InstanceMetadataDemo {
             // that the value is equal to what it thinks is a child key, and that querying that child key returns null.
             IEnumerable<string> metadataItems = EC2InstanceMetadata.GetItems(startingPath);
 
-            if (metadataItems.Count() == 1 && metadataItems.First() == EC2InstanceMetadata.GetData(startingPath) && EC2InstanceMetadata.GetData(startingPath + metadataItems.First()) is null) {
-                // This is just a key value pair. Add it to our dictionary
-                values.Add(startingPathName, EC2InstanceMetadata.GetData(startingPath));
+            try {
+                if (metadataItems.Count() == 1 && metadataItems.First() == EC2InstanceMetadata.GetData(startingPath) && EC2InstanceMetadata.GetData(startingPath + metadataItems.First()) is null) {
+                    // This is just a key value pair. Add it to our dictionary
+                    values.Add(startingPathName, EC2InstanceMetadata.GetData(startingPath));
 
-            } else {
+                } else {
 
-                // Not affected by the bug. Recurse through child keys
-                values.Add(startingPathName, RecurseItems(startingPath));
+                    // Not affected by the bug. Recurse through child keys
+                    values.Add(startingPathName, RecurseItems(startingPath));
+                }
+            } catch(Exception ex) {
+                if(ex is System.ArgumentNullException) {
+                    Console.WriteLine("The requested path was not found in the Metadata");
+                } else {
+                    Console.WriteLine("An unexpected error occurred: " + ex.Message);
+                }
             }
 
             return (JsonConvert.SerializeObject(values));
