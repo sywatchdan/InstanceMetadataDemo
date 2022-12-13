@@ -12,10 +12,10 @@ namespace InstanceMetadataDemo {
             // Get the name for the first object. This will either be the requested key, or 'Metadata' if no key was specified
             string startingPathName = (startingPath == "/" ? "Metadata" : startingPath.Substring(startingPath.LastIndexOf("/") + 1));
 
-            // AWS SDK BUG FIX 1: Requested path needs to end with a trailing slash
+            // Path needs to end with a trailing slash
             if (startingPath.EndsWith("/") == false) { startingPath += "/"; }
 
-            // AWS SDK BUG FIX 2: Calling GetItems on a key value pair incorrectly returns the value as a child key. To get around this, we check
+            // AWS SDK BUG FIX: Calling GetItems on a key value pair incorrectly returns the value as a child key. To get around this, we check
             // that the value is equal to what it thinks is a child key, and that querying that child key returns null.
             IEnumerable<string> metadataItems = EC2InstanceMetadata.GetItems(startingPath);
 
